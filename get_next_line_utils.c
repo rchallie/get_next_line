@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/28 17:35:18 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 17:48:23 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ char	*get_content(char *line_get, int fd)
 		if (line_end != len_str(buffer) + 1 && line_get[line_end] == '\n')
 			break ;
 	}
+	if (!line_get)
+		return (0);
 	free(save_buff);
 	return (line_get);
 }
