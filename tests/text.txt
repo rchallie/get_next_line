@@ -1,5 +1,0 @@
-- Bonjour,
-  Je suis un programme qui lis un
-  fichier.
-  Promis je me suis pas galère à coder !
-- TU MENT
