@@ -6,12 +6,11 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/28 16:36:38 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 17:35:18 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 size_t	len_str(const char *s)
 {
@@ -100,21 +99,25 @@ char	*get_content(char *line_get, int fd)
 {
 	size_t	line_end;
 	char	*buffer;
+	char	*save_buff;
 	int		reader;
 
 	line_end = 0;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0);
+	save_buff = buffer;
 	while ((reader = read(fd, buffer, BUFFER_SIZE) > 0))
 	{
 		buffer[BUFFER_SIZE] = '\0';
 		line_get = join_str((const char *)line_get, (const char *)buffer);
+		while (*buffer)
+			*buffer++ = '\0';
 		while (line_get[line_end] && line_get[line_end] != '\n')
 			line_end++;
 		if (line_end != len_str(buffer) + 1 && line_get[line_end] == '\n')
 			break ;
 	}
-	free(buffer);
+	free(save_buff);
 	return (line_get);
 }
