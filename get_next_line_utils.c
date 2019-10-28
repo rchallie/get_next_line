@@ -6,11 +6,12 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/25 16:19:02 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 13:16:16 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h> //NOP
 
 size_t	len_str(const char *s)
 {

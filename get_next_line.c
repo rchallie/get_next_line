@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 10:20:38 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/25 16:04:11 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 13:36:52 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@ char	*set_line(char **line, char *line_get)
 	while (line_get[line_end] && line_get[line_end] != '\n')
 		line_end++;
 	*line = sub_char_str(line_get, '\n', 0, len_str(line_get));
+	free(line_get);
 	if (*line)
 		line_get = sub_char_str(line_get, '\0', (int)line_end + 1,
 		len_str(line_get) - (line_end + 1));
 	else
 	{
 		*line = sub_char_str(line_get, '\0', 0, len_str(line_get));
-		free(line_get);
 		line_get = NULL;
 		return (0);
 	}
 	return (line_get);
 }
 
+//free 
 int		get_next_line(int fd, char **line)
 {
 	size_t		line_end;
@@ -52,6 +53,7 @@ int		get_next_line(int fd, char **line)
 		line_get = set_line(line, line_get);
 		if (line_get == 0)
 			return (0);
+		free(*line);
 	}
 	else
 	{
