@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 10:29:57 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/25 14:08:08 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:07:10 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int		get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line);
 
-char	*sub_char_str(const char *s, int c, int start, size_t max_len);
-char	*join_str(const char *s1, const char *s2);
-char	*set_zero(char *s);
-char	*get_content(char *line_get, int fd);
+char				*sub_char_str(const char *s, int c, int start,
+					size_t max_len);
+char				*join_str(const char *s1, const char *s2);
+char				*get_content(char *line_get, int fd);
+char				*set_line(char **line, char *line_get);
 
-size_t	len_str(const char *s);
+size_t				len_str(const char *s);
 
 #endif

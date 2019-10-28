@@ -6,12 +6,12 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:16 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/28 16:36:38 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> //NOP
+#include <stdio.h>
 
 size_t	len_str(const char *s)
 {
@@ -52,8 +52,6 @@ char	*join_str(const char *s1, const char *s2)
 	char	*new_str;
 	char	*save_nstr;
 	char	*save_s1;
-	size_t	s1_len;
-	size_t	s2_len;
 
 	if (!s1 && !s2)
 		return (0);
@@ -62,9 +60,7 @@ char	*join_str(const char *s1, const char *s2)
 	if (!s2)
 		return (sub_char_str(s1, '\0', 0, len_str(s1) + 1));
 	save_s1 = (char *)s1;
-	s1_len = len_str(s1);
-	s2_len = len_str(s2);
-	if (!(new_str = malloc(sizeof(char) * (s1_len + s2_len + 1))))
+	if (!(new_str = malloc(sizeof(char) * (len_str(s1) + len_str(s2) + 1))))
 		return (0);
 	save_nstr = new_str;
 	while (*s1)
@@ -77,12 +73,27 @@ char	*join_str(const char *s1, const char *s2)
 	return (new_str);
 }
 
-//A virer et  mettre dans la boucle necessaire
-char	*set_zero(char *s)
+char	*set_line(char **line, char *line_get)
 {
-	while (*s)
-		*s++ = '\0';
-	return (s);
+	size_t		line_end;
+	char		*save_line_get;
+
+	line_end = 0;
+	save_line_get = line_get;
+	while (line_get[line_end] && line_get[line_end] != '\n')
+		line_end++;
+	*line = sub_char_str(line_get, '\n', 0, len_str(line_get));
+	if (*line)
+		line_get = sub_char_str(line_get, '\0', (int)line_end + 1,
+		len_str(line_get) - (line_end + 1));
+	else
+	{
+		*line = sub_char_str(line_get, '\0', 0, len_str(line_get));
+		free(save_line_get);
+		return (0);
+	}
+	free(save_line_get);
+	return (line_get);
 }
 
 char	*get_content(char *line_get, int fd)
@@ -99,7 +110,6 @@ char	*get_content(char *line_get, int fd)
 	{
 		buffer[BUFFER_SIZE] = '\0';
 		line_get = join_str((const char *)line_get, (const char *)buffer);
-		set_zero(buffer);
 		while (line_get[line_end] && line_get[line_end] != '\n')
 			line_end++;
 		if (line_end != len_str(buffer) + 1 && line_get[line_end] == '\n')
