@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/28 17:48:23 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/30 14:41:31 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ char	*get_content(char *line_get, int fd)
 	int		reader;
 
 	line_end = 0;
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (0);
 	save_buff = buffer;
 	while ((reader = read(fd, buffer, BUFFER_SIZE) > 0))
@@ -115,6 +114,7 @@ char	*get_content(char *line_get, int fd)
 			*buffer++ = '\0';
 		while (line_get[line_end] && line_get[line_end] != '\n')
 			line_end++;
+		buffer = save_buff;
 		if (line_end != len_str(buffer) + 1 && line_get[line_end] == '\n')
 			break ;
 	}
