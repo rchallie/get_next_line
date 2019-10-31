@@ -6,7 +6,7 @@
 /*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:23:12 by rchallie          #+#    #+#             */
-/*   Updated: 2019/10/30 14:41:31 by rchallie         ###   ########.fr       */
+/*   Updated: 2019/10/31 13:25:59 by rchallie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,9 @@ char	*set_line(char **line, char *line_get)
 	return (line_get);
 }
 
-char	*get_content(char *line_get, int fd)
+void	init_buffer(char *buffer)
 {
-	size_t	line_end;
-	char	*buffer;
-	char	*save_buff;
-	int		reader;
-
-	line_end = 0;
-	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (0);
-	save_buff = buffer;
-	while ((reader = read(fd, buffer, BUFFER_SIZE) > 0))
-	{
-		buffer[BUFFER_SIZE] = '\0';
-		line_get = join_str((const char *)line_get, (const char *)buffer);
-		while (*buffer)
-			*buffer++ = '\0';
-		while (line_get[line_end] && line_get[line_end] != '\n')
-			line_end++;
-		buffer = save_buff;
-		if (line_end != len_str(buffer) + 1 && line_get[line_end] == '\n')
-			break ;
-	}
-	if (!line_get)
-		return (0);
-	free(save_buff);
-	return (line_get);
+	buffer[BUFFER_SIZE] = '\0';
+	while (*buffer)
+		*buffer++ = '\0';
 }
