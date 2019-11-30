@@ -5,6 +5,6 @@ Get_next_line (42cursus) 2019-2020
 - Result        : 110%
 - Observations  : Thx to [@tpOns](https://github.com/tp0ns) for him help
 
-This is my get_net_line project from the 42 cursus,
+This is my get_next_line project from the 42 cursus,
 need help:
 rchallie@student.42.fr
